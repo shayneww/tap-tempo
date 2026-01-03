@@ -1,4 +1,4 @@
-# Tap Tempo
+# Tap Tempo 🎶
 A simple C++ tool to calculate a song's BPM (beats per minute) by tapping the `ENTER` key.
 
 ## Features
