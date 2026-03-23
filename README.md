@@ -1,5 +1,5 @@
 # Tap Tempo 🎶
-A simple C++ tool to calculate a song's BPM (beats per minute) by tapping the `ENTER` key to the rhythm.
+A simple C++ tool to calculate a song's BPM (beats per minute) through user input.
 
 ## Features
 **Accurate timing:** Usage of std::chrono::steady_clock for high-precision interval measurement.
@@ -8,16 +8,30 @@ A simple C++ tool to calculate a song's BPM (beats per minute) by tapping the `E
 
 **BPM Reset (main loop):** Reset the counter instantly by entering `0` in the console.
 
-## Usage example
+## Using it in your own project
 
-Example in: Visual Studio 2022
-- Create a new **Empty Project** in C++.
-- Add `main.cpp`, `TapTempo.cpp`, and `TapTempo.h` to the project.
-- Click Run.
-- Tap `ENTER` to the rhythm of your favourite song.
+- Copy `TapTempo.h` and `TapTempo.cpp` into your project directory.
+- Include the header where you need it: `#include "TapTempo.h"`
+- Create a `TapTempo` object and call `.tap()` whenever your input event (button click, MIDI signal, etc.) occurs.
 
-> [!TIP]
-> Main loop doesn't end until you reset it manually. This means that tapping after a pause will display lower BPM than before.
+**Example code:**
+```cpp
+#include <iostream>
+#include "TapTempo.h"
+
+int main() {
+    TapTempo tapper;
+
+    // call tap() whenever your input event occurs
+    bool isBeat = tapper.tap(); 
+    
+    if (isBeat) {
+        std::cout << "Current BPM: " << tapper.getBPM() << std::endl;
+    }
+
+    return 0;
+}
+```
 
 > [!NOTE]
 > Calculated BPM values may vary depending on the consistency of the tapping!
