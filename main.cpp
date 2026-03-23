@@ -18,16 +18,16 @@ int main() {
 
 		if (input == "0") {
 			tapper.reset();
-			std::cout << "--- RESET ---\n" << std::endl;
+			std::cout << "\n--- RESET ---\n" << std::endl;
 			continue;
 		}
 
 		bool isBeat = tapper.tap();
-		if (!isBeat) {
-			std::cout << "First tap registered. Keep tapping!" << std::endl;
+		if (isBeat) {
+			std::cout << "BPM: " << tapper.getBPM() << std::endl;
 		}
 		else {
-			std::cout << "BPM: " << tapper.getBPM() << std::endl;
+			std::cout << "First tap registered. Keep tapping!" << std::endl;
 		}
 	}
 	return 0;
