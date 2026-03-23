@@ -12,7 +12,7 @@ void TapTempo::reset() {
 }
 
 bool TapTempo::tap() {
-	auto currentTapTime = std::chrono::steady_clock::now();
+	auto currentTapTime = std::chrono::steady_clock::now(); // get current time
 
 	if (isFirstTap) {
 		lastTapTime = currentTapTime;
@@ -21,11 +21,11 @@ bool TapTempo::tap() {
 	}
 
 	std::chrono::duration<double> elapsed = currentTapTime - lastTapTime;
-	double interval = elapsed.count();
+	double interval = elapsed.count(); // get the interval in seconds
 
 	intervals.push_back(interval);
 
-	if (intervals.size() > AVERAGE) {
+	if (intervals.size() > ROLLING_AVERAGE) { // only keep the last 16 intervals to get the rolling average
 		intervals.erase(intervals.begin());
 	}
 
@@ -39,5 +39,5 @@ int TapTempo::getBPM() {
 	double sum = std::accumulate(intervals.begin(), intervals.end(), 0.0);
 	double avg = sum / intervals.size();
 	if (avg == 0) return 0;
-	return std::round(60.0 / avg);
+	return std::round(60.0 / avg); // BPM = 60 seconds / average interval in seconds
 }
